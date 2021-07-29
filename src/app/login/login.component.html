@@ -2,6 +2,7 @@
     <form action="" >
         <div class="alert alert-danger m" *ngIf="loginFailed">Username/Password Incorrect</div>
         <div class="alert alert-success" *ngIf="loginSuccess">Logged In</div>
+        <div class="alert alert-info" *ngIf="isRedirect && !loginSuccess && !loginFailed">Need to login before editing employee details</div>
         <div class="form-group">
             <label for="name"><strong>Name</strong></label>
             <input type="text" class="form-control"  name="name" id="name" #name>
