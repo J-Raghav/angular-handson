@@ -1,9 +1,29 @@
-<div class="d-flex" *ngFor="let user of users">
-    <div class="box">
-        <img src="{{user.avatar}}" class="m-2" style="max-width:100px;" alt="">
-        <div class="d-inline-block">
-            <h3  class="d-inline-block">{{ user?.first_name }}</h3><br>
-            <span> {{ user?.email }}</span><br>
-        </div> 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10 d-flex flex-wrap align-items-stretch w-80"> 
+            <div class="box" *ngFor="let user of users">
+                <img src="{{user.avatar}}" class="m-2" style="max-width:100px;" alt="">
+                <div class="d-inline-block">
+                    <h3  class="d-inline-block">{{ user?.first_name }}</h3><br>
+                    <span> {{ user?.email }}</span><br>
+                </div> 
+                <a class="text-danger" (click)="deleteUser(user.id)">delete</a>
+            </div>
+        </div>
+        
+        <div class="col-2">
+            <form class="mb-3">
+                <h3>Create User</h3>
+                <input type="text" name="first_name" id="" #name>
+                <br>
+                <input type="email" name="email" id="" #email>
+                <br>
+                <input type="submit" value="create" (click)="createUser(name.value, email.value)">
+            </form>
+            <h3>Response</h3>
+            <pre>
+                {{ response || "No response" | json}}
+            </pre>
+        </div>
     </div>
 </div>
