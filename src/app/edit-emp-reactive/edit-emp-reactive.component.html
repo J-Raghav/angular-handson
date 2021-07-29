@@ -1,0 +1,56 @@
+<form class="block" [formGroup]="empForm" (ngSubmit)="onSubmit()"> 
+    <div class="form-group">
+        <label for="name"> <strong>Name</strong> </label><br>
+        <input type="text" id="name" name="name" formControlName="name">
+        <div *ngIf="name?.invalid && (name?.dirty || name?.touched)"
+            class="text-danger">
+
+            <div *ngIf="name?.errors?.required">
+                Name is required.
+            </div>
+            <div *ngIf="name?.errors?.minlength">
+                Name must be at least 4 characters long.
+            </div>
+            <div *ngIf="name?.errors?.forbiddenName">
+                Name cannot be Bob.
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="salary"><strong>Salary</strong></label><br>
+        <input type="text" name="salary" id="salary" formControlName="salary">
+    </div>
+
+    <div class="form-group">
+        <strong>Is Permanent</strong><br>
+        <label for="permanentTrue">Yes</label>
+        <input type="radio" name="permanent" id="permanentTrue" [value]="TRUE" formControlName="permanent">
+
+        <label for="permanentFalse">No</label>
+        <input type="radio" name="permanent" id="permanentFalse" [value]="FALSE" formControlName="permanent">
+    </div>
+
+    <div class="form-group">
+        <label for="dateOfBirth"><strong>Date of Birth</strong></label><br>
+        <input type="date" name="dateOfBirth" id="dateOfBirth" formControlName="dateOfBirth">
+    </div>
+
+    <div class="form-group">
+        <label for="department"><strong>Department</strong></label><br>
+
+        <select name="department" id="department"  (change)="changeDept($event)" required>
+            <option *ngFor="let dept of departments" [value]="dept.id" [selected]="dept.id === employee.department.id">{{ dept.name }}</option>
+        </select>
+    </div>
+
+    <button type="submit" [disabled]="!empForm.valid">Save</button>
+</form>
+
+<div class="block">
+    <strong>Employee Model</strong><br>    
+    <pre>{{empForm.value | json }}</pre>
+</div>
+
+<a routerLink="/list-emp" class="block"  routerLinkActive='active-link'>All Employees</a><br>
+<a routerLink="/edit-emp-template-driven" class="block"  routerLinkActive='active-link'>Edit Employee Template Driven</a><br>

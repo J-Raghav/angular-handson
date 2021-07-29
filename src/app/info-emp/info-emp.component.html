@@ -1,0 +1,5 @@
+<div class="box">
+    <h3>{{ employee?.name }}</h3>
+    <span> {{ employee?.salary | currency : 'INR' }}</span><br>
+    <a [routerLink]="['/edit-emp-reactive', employee?.id]">Edit</a>
+</div>

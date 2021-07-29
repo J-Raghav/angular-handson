@@ -1,0 +1,56 @@
+<form class="block" #empForm="ngForm" (ngSubmit)="onSubmit(empForm)"> 
+    <div class="form-group">
+        <label for="name"> <strong>Name</strong> </label><br>
+        <input type="text" id="name" name="name" [(ngModel)]="employee.name" #name="ngModel" minlength="2" maxlength="10" required>
+        <div [hidden]="!name.errors?.required"
+             class="text-danger small">
+          Name is required
+        </div>
+        <div [hidden]="!name.errors?.minlength"
+             class="text-danger small">
+          Name should be at least 2 Character long 
+        </div>
+        <div [hidden]="!name.errors?.maxlength"
+             class="text-danger small">
+          Name should be at most 10 Character long 
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="salary"><strong>Salary</strong></label><br>
+        <input type="text" name="salary" id="salary" [(ngModel)]="employee.salary" #salary="ngModel" required>
+    </div>
+
+    <div class="form-group">
+        <strong>Is Permanent</strong><br>
+        <label for="permanentTrue">Yes</label>
+        <input type="radio" name="permanent" id="permanentTrue" [value]="TRUE" [(ngModel)]="employee.permanent" #permanent="ngModel" required>
+
+        <label for="permanentFalse">No</label>
+        <input type="radio" name="permanent" id="permanentFalse" [value]="FALSE" [(ngModel)]="employee.permanent" #permanent="ngModel" required>
+    </div>
+
+    <div class="form-group">
+        <label for="department"><strong>Department</strong></label><br>
+
+        <select name="department" id="department" [(ngModel)]="employee.department.id" (change)="changeDept($event)" required>
+            <option *ngFor="let dept of departments" [selected]="dept.id === employee.department.id" [value]="dept.id" >{{ dept.name }}</option>
+        </select>
+    </div>
+
+    <button type="submit" [disabled]="!empForm.valid">Save</button>
+</form>
+
+<!-- <div class="block">
+    <strong>Employee Model</strong><br>    
+    <pre>{{employee | json }}</pre>
+</div> -->
+
+<div class="block">
+    <strong>Angular Generated Form Model</strong><br>    
+    <pre>{{empForm.value | json}}</pre>
+</div>
+
+<a routerLink="/list-emp" class="block"  routerLinkActive='active-link'>All Employees</a><br>
+<a routerLink="/edit-emp-reactive" class="block"  routerLinkActive='active-link'>Edit Employee Reactive</a>
+

@@ -1,0 +1,12 @@
+<h2>Employees</h2>
+<br>
+<div>
+    <label for="search"><strong>Search</strong></label>
+    <input type="search" class="ml-3" name="search" id="search" (keyup)="search()" [(ngModel)]="searchKey">
+</div>
+<br>
+<div class="w-100">
+    <app-info-emp *ngFor="let emp of filteredEmployees" [employee]="emp">
+
+    </app-info-emp>
+</div>
